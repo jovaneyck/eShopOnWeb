@@ -22,6 +22,8 @@ public class BasketService : IBasketService
 
     public async Task<Basket> AddItemToBasket(string username, int catalogItemId, decimal price, int quantity = 1)
     {
+        var dog = new Dog(DogType.RETRIEVER, 2, 0, false);
+        
         var basketSpec = new BasketWithItemsSpecification(username);
         var basket = await _basketRepository.FirstOrDefaultAsync(basketSpec);
 
@@ -33,6 +35,8 @@ public class BasketService : IBasketService
 
         basket.AddItem(catalogItemId, price, quantity);
 
+        var x = dog.GetRunningSpeed();
+        
         await _basketRepository.UpdateAsync(basket);
         return basket;
     }

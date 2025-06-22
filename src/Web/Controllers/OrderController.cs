@@ -23,8 +23,10 @@ public class OrderController : Controller
     public async Task<IActionResult> MyOrders()
     {   
         Guard.Against.Null(User?.Identity?.Name, nameof(User.Identity.Name));
-        var viewModel = await _mediator.Send(new GetMyOrders(User.Identity.Name));
+        var dog = new Dog(DogType.RETRIEVER, 2, 0, false);
 
+        var viewModel = await _mediator.Send(new GetMyOrders(User.Identity.Name));
+        var x = dog.GetRunningSpeed();
         return View(viewModel);
     }
 
