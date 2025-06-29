@@ -35,7 +35,7 @@ public class OrderService : IOrderService
 
         Guard.Against.Null(basket, nameof(basket));
         Guard.Against.EmptyBasketOnCheckout(basket.Items);
-        var dog = new Dog(DogType.Retriever, 2, 0, false);
+        var dog = Dog.Create(DogType.Retriever, 2, 0, false);
 
         var catalogItemsSpecification = new CatalogItemsSpecification(basket.Items.Select(item => item.CatalogItemId).ToArray());
         var catalogItems = await _itemRepository.ListAsync(catalogItemsSpecification);

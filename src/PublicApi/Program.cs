@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 using NimblePros.Metronome;
 
 var builder = WebApplication.CreateBuilder(args);
-var pointer = new Dog(DogType.Pointer, 3, 100, true);
+var pointer = Dog.Create(DogType.Pointer, 3, 100, true);
 // Add service defaults & Aspire components.
 builder.AddAspireServiceDefaults();
 

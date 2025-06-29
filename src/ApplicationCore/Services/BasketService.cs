@@ -23,7 +23,7 @@ public class BasketService : IBasketService
 
     public async Task<Basket> AddItemToBasket(string username, int catalogItemId, decimal price, int quantity = 1)
     {
-        var dog = new Dog(DogType.Retriever, 2, 0, false);
+        var dog = Dog.Create(DogType.Retriever, 2, 0, false);
         
         var basketSpec = new BasketWithItemsSpecification(username);
         var basket = await _basketRepository.FirstOrDefaultAsync(basketSpec);

@@ -6,60 +6,114 @@ public enum DogType
 {
     Pointer,
     Retriever,
-    Labrador
+    Labrador,
+    Pekinese
 }
 
-public class Dog
+public abstract class Dog
 {
-    private readonly bool _isPottyTrained;
-    private readonly int _numberOfBones;
-    private readonly DogType _type;
-    private readonly double _litersOfWater;
-
-    public Dog(DogType type, int numberOfBones, double litersOfWater, bool isPottyTrained)
+    public static Dog Create(DogType type, int numberOfBones, double litersOfWater, bool isPottyTrained, int amountOfFood = 0, int unused = 0)
     {
-        _type = type;
-        _numberOfBones = numberOfBones;
-        _litersOfWater = litersOfWater;
-        _isPottyTrained = isPottyTrained;
-    }
-
-    public double GetRunningSpeed()
-    {
-        return _type switch
+        return type switch
         {
-            DogType.Pointer => GetBaseRunningSpeed(),
-            DogType.Retriever => Math.Max(0, GetBaseRunningSpeed() - (GetBoneFactor() * _numberOfBones)),
-            DogType.Labrador => _isPottyTrained ? 0 : GetBaseSpeed(_litersOfWater),
+            DogType.Pointer => new PointerDog(),
+            DogType.Retriever => new RetrieverDog(numberOfBones),
+            DogType.Labrador => new LabradorDog(litersOfWater, isPottyTrained),
+            DogType.Pekinese => new PekineseDog(amountOfFood),
             _ => throw new ArgumentOutOfRangeException()
         };
     }
 
-    private double GetBaseSpeed(double litersOfWater)
+    public abstract double GetRunningSpeed();
+    public abstract string GetBark();
+
+    protected double GetBaseRunningSpeed()
     {
-        return Math.Min(24.0, litersOfWater * GetBaseRunningSpeed());
+        return 12.0;
+    }
+}
+
+public class PointerDog : Dog
+{
+    public override double GetRunningSpeed()
+    {
+        return GetBaseRunningSpeed();
+    }
+
+    public override string GetBark()
+    {
+        return "Woof!";
+    }
+}
+
+public class RetrieverDog : Dog
+{
+    private readonly int _numberOfBones;
+
+    public RetrieverDog(int numberOfBones)
+    {
+        _numberOfBones = numberOfBones;
+    }
+
+    public override double GetRunningSpeed()
+    {
+        return Math.Max(0, GetBaseRunningSpeed() - (GetBoneFactor() * _numberOfBones));
+    }
+
+    public override string GetBark()
+    {
+        return "Waaf!";
     }
 
     private double GetBoneFactor()
     {
         return 9.0;
     }
+}
 
-    private double GetBaseRunningSpeed()
+public class LabradorDog : Dog
+{
+    private readonly bool _isPottyTrained;
+    private readonly double _litersOfWater;
+
+    public LabradorDog(double litersOfWater, bool isPottyTrained)
     {
-        return 12.0;
+        _litersOfWater = litersOfWater;
+        _isPottyTrained = isPottyTrained;
     }
 
-    public string GetBark()
+    public override double GetRunningSpeed()
     {
-        string value = _type switch
-        {
-            DogType.Pointer => "Woof!",
-            DogType.Retriever => "Waaf!",
-            DogType.Labrador => _litersOfWater > 0 ? "WOOF" : "-",
-            _ => throw new ArgumentOutOfRangeException()
-        };
+        return _isPottyTrained ? 0 : GetBaseSpeed(_litersOfWater);
+    }
 
-        return value;
+    public override string GetBark()
+    {
+        return _litersOfWater > 0 ? "WOOF" : "-";
+    }
+
+    private double GetBaseSpeed(double litersOfWater)
+    {
+        return Math.Min(24.0, litersOfWater * GetBaseRunningSpeed());
+    }
+}
+
+public class PekineseDog : Dog
+{
+    private readonly int _amountOfFood;
+
+    public PekineseDog(int amountOfFood)
+    {
+        _amountOfFood = amountOfFood;
+    }
+
+    public override double GetRunningSpeed()
+    {
+        return GetBaseRunningSpeed();
+    }
+
+    public override string GetBark()
+    {
+        return _amountOfFood < 100 ? "HUNGRY" : "OMNOM";
     }
 }
