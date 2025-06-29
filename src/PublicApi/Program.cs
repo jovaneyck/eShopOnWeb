@@ -3,6 +3,7 @@ using FastEndpoints;
 using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.eShopWeb.ApplicationCore.Entities.DogAggregate;
 using Microsoft.eShopWeb.Infrastructure;
 using Microsoft.eShopWeb.Infrastructure.Identity;
 using Microsoft.eShopWeb.PublicApi;
@@ -15,7 +16,7 @@ using Microsoft.Extensions.Logging;
 using NimblePros.Metronome;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var pointer = new Dog(DogType.Pointer, 3, 100, true);
 // Add service defaults & Aspire components.
 builder.AddAspireServiceDefaults();
 
@@ -53,7 +54,7 @@ builder.Services.AddSwagger();
 
 builder.Services.AddMetronome();
 string seqUrl = builder.Configuration["Seq:ServerUrl"] ?? "http://localhost:5341";
-
+var bark = pointer.GetBark();
 builder.AddSeqEndpoint(connectionName: "seq", options =>
 {
     options.ServerUrl = seqUrl;

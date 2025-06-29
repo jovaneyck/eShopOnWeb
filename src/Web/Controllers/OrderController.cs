@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.eShopWeb.ApplicationCore.Entities.DogAggregate;
 using Microsoft.eShopWeb.Web.Features.MyOrders;
 using Microsoft.eShopWeb.Web.Features.OrderDetails;
 
@@ -23,10 +24,10 @@ public class OrderController : Controller
     public async Task<IActionResult> MyOrders()
     {   
         Guard.Against.Null(User?.Identity?.Name, nameof(User.Identity.Name));
-        var dog = new Dog(DogType.RETRIEVER, 2, 0, false);
+        var dog = new Dog(DogType.Retriever, 2, 0, false);
 
         var viewModel = await _mediator.Send(new GetMyOrders(User.Identity.Name));
-        var x = dog.GetRunningSpeed();
+        var speed = dog.GetRunningSpeed();
         return View(viewModel);
     }
 

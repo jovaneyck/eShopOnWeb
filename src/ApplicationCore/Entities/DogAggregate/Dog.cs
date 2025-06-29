@@ -1,10 +1,12 @@
 ﻿using System;
 
+namespace Microsoft.eShopWeb.ApplicationCore.Entities.DogAggregate;
+
 public enum DogType
 {
-    POINTER,
-    RETRIEVER,
-    LABRADOR
+    Pointer,
+    Retriever,
+    Labrador
 }
 
 public class Dog
@@ -24,17 +26,13 @@ public class Dog
 
     public double GetRunningSpeed()
     {
-        switch (_type)
+        return _type switch
         {
-            case DogType.POINTER:
-                return GetBaseRunningSpeed();
-            case DogType.RETRIEVER:
-                return Math.Max(0, GetBaseRunningSpeed() - (GetBoneFactor() * _numberOfBones));
-            case DogType.LABRADOR:
-                return _isPottyTrained ? 0 : GetBaseSpeed(_litersOfWater);
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+            DogType.Pointer => GetBaseRunningSpeed(),
+            DogType.Retriever => Math.Max(0, GetBaseRunningSpeed() - (GetBoneFactor() * _numberOfBones)),
+            DogType.Labrador => _isPottyTrained ? 0 : GetBaseSpeed(_litersOfWater),
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 
     private double GetBaseSpeed(double litersOfWater)
@@ -54,21 +52,13 @@ public class Dog
 
     public string GetBark()
     {
-        string value;
-        switch (_type)
+        string value = _type switch
         {
-            case DogType.POINTER:
-                value = "Woof!";
-                break;
-            case DogType.RETRIEVER:
-                value = "Waaf!";
-                break;
-            case DogType.LABRADOR:
-                value = _litersOfWater > 0 ? "WOOF" : "-";
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+            DogType.Pointer => "Woof!",
+            DogType.Retriever => "Waaf!",
+            DogType.Labrador => _litersOfWater > 0 ? "WOOF" : "-",
+            _ => throw new ArgumentOutOfRangeException()
+        };
 
         return value;
     }
