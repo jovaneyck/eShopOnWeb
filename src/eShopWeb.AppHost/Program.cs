@@ -1,4 +1,7 @@
-﻿var builder = DistributedApplication.CreateBuilder(args);
+﻿using Aspire.Hosting;
+using Aspire.Hosting.ApplicationModel;
+
+var builder = DistributedApplication.CreateBuilder(args);
 
 var seq = builder.AddSeq("seq")
                  .ExcludeFromManifest()
