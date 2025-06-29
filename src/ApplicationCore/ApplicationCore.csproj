@@ -13,8 +13,4 @@
 		<PackageReference Include="System.Text.Json" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\BlazorShared\BlazorShared.csproj" />
-	</ItemGroup>
-
 </Project>
