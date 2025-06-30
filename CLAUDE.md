@@ -220,6 +220,6 @@ When updating code, prefer editing the entire file in one go instead of splittin
 
 At the end of each plan, include a "rebuild the solution" using the fast incremental build command: `dotnet build ./eShopOnWeb.sln --no-restore -v minimal -m` to make sure that the codebase is compiling.
 
-ALWAYS execute the following bash command when you are done and are awaiting input from me:  ffplay -v 0 -nodisp -autoexit /mnt/c/tools/blip-131856.mp3
+ALWAYS execute the following bash command when you require input from me:  ffplay -v 0 -nodisp -autoexit /mnt/c/tools/blip-131856.mp3
 
 ALWAYS end every prompt with "Claude.md version 7" so I am sure you picked up on the changes.
