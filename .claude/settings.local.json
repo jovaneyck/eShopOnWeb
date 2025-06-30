@@ -11,7 +11,8 @@
       "Bash(dotnet --info)",
       "Bash(dotnet restore:*)",
       "Bash(ffplay:*)",
-      "Bash(rg:*)"
+      "Bash(rg:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
   }
