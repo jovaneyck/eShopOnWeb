@@ -197,6 +197,8 @@ You will ALWAYS break up work in smaller steps if the build/test feedback loop i
 
 When implementing new features, you will ALWAYS take a look at the current design and evaluate whether some preparatory refactoring/redesign will make implementing the feature easier and incorporate this preparatory refactoring into your plan. Make the change easy, then make the easy change.
 
+ALWAYS search for references when you are changing part of the public/protected API (constructor, public/protected methods, public/protected properties) so you can update all external references as well.
+
 NEVER invent any new behavior on your own, always take a look at new and existing tests when introducing new code.
 
 When updating code, prefer editing the entire file in one go instead of splitting every change up into a separate step. Just try a replace all of the entire file instead of trying to update small pieces of text multiple times.
