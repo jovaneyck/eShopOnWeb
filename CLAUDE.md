@@ -24,7 +24,13 @@ dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastru
 
 ### Build and Test
 ```bash
-# Build entire solution
+# Initial restore (only when packages change)
+dotnet restore ./eShopOnWeb.sln
+
+# Fast incremental builds (recommended for development)
+dotnet build ./eShopOnWeb.sln --no-restore -v minimal -m
+
+# Full build (when needed)
 dotnet build ./eShopOnWeb.sln --configuration Debug
 
 # Run all tests with coverage
@@ -177,6 +183,13 @@ dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.
 - Implement pagination for large datasets
 - Consider using in-memory database for development/testing
 
+### Build Performance
+- **Fast Development Builds**: Use `dotnet build ./eShopOnWeb.sln --no-restore -v minimal -m` for ~8-10 second incremental builds
+- **Package Lock Files**: Projects configured with `RestorePackagesWithLockFile=true` for faster package resolution
+- **Debug Optimizations**: Documentation generation and warning-as-error disabled for Debug builds
+- **Parallel Builds**: Use `-m` flag for parallel compilation
+- **Reduced System Dependencies**: Redundant System.* packages removed from Web.csproj (included by default in .NET 9)
+
 ## Claude configuration
 
 You are an expert software craftsman.
@@ -203,6 +216,8 @@ NEVER invent any new behavior on your own, always take a look at new and existin
 
 When updating code, prefer editing the entire file in one go instead of splitting every change up into a separate step. Just try a replace all of the entire file instead of trying to update small pieces of text multiple times.
 
-At the end of each plan, include a "rebuild the solution" to make sure that the codebase is compiling.
+At the end of each plan, include a "rebuild the solution" using the fast incremental build command: `dotnet build ./eShopOnWeb.sln --no-restore -v minimal -m` to make sure that the codebase is compiling.
 
-End every prompt with "Claude.md version 6" so I am sure you picked up on the changes.
+ALWAYS execute the following bash command when you are done and are awaiting input from me:  ffplay -v 0 -nodisp -autoexit /mnt/c/tools/blip-131856.mp3
+
+ALWAYS end every prompt with "Claude.md version 7" so I am sure you picked up on the changes.

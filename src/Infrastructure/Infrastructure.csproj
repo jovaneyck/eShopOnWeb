@@ -3,6 +3,8 @@
 	<PropertyGroup>		
 		<RootNamespace>Microsoft.eShopWeb.Infrastructure</RootNamespace>
 		<Nullable>enable</Nullable>
+		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+		<GenerateDocumentationFile Condition="'$(Configuration)'=='Debug'">false</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
