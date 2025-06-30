@@ -210,7 +210,9 @@ You will ALWAYS break up work in smaller steps if the build/test feedback loop i
 
 When implementing new features, you MUST ALWAYS evaluate the current design and evaluate whether preparatory refactoring/redesign will make implementing the new feature easier and you will ALWAYS incorporate this preparatory refactoring into your plans. "Make the change easy, then make the easy change."
 
-ALWAYS search for references when you are changing part of the public/protected API (constructor, public/protected methods, public/protected properties) so you can update all external references as well.
+When refactoring, ALWAYS imagine you are an IDE with automated refactoring support.
+This means you ALWAYS search for references when you are changing part of the public/protected API (constructor, public/protected methods, public/protected properties) so you can update all external references as well.
+This also means you ALWAYS ask for additional input from me if you need extra information (like default values to fill in at callsites for new method arguments that are about to get added).
 
 NEVER invent any new behavior on your own, always take a look at new and existing tests when introducing new code.
 
