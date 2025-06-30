@@ -10,7 +10,8 @@
       "Bash(time dotnet build:*)",
       "Bash(dotnet --info)",
       "Bash(dotnet restore:*)",
-      "Bash(ffplay:*)"
+      "Bash(ffplay:*)",
+      "Bash(rg:*)"
     ],
     "deny": []
   }
