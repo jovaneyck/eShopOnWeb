@@ -24,13 +24,7 @@ dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastru
 
 ### Build and Test
 ```bash
-# Initial restore (only when packages change)
-dotnet restore ./eShopOnWeb.sln
-
-# Fast incremental builds (recommended for development)
-dotnet build ./eShopOnWeb.sln --no-restore -v minimal -m
-
-# Full build (when needed)
+# Full build
 dotnet build ./eShopOnWeb.sln --configuration Debug
 
 # Run all tests with coverage
@@ -182,11 +176,3 @@ dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.
 - Use specifications for complex queries instead of raw LINQ
 - Implement pagination for large datasets
 - Consider using in-memory database for development/testing
-
-### Build Performance
-- **Fast Development Builds**: Use `dotnet build ./eShopOnWeb.sln --no-restore -v minimal -m` for ~8-10 second incremental builds
-- **Package Lock Files**: Projects configured with `RestorePackagesWithLockFile=true` for faster package resolution
-- **Debug Optimizations**: Documentation generation and warning-as-error disabled for Debug builds
-- **Parallel Builds**: Use `-m` flag for parallel compilation
-- **Reduced System Dependencies**: Redundant System.* packages removed from Web.csproj (included by default in .NET 9)
-- 
