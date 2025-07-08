@@ -1,4 +1,7 @@
-﻿using Ardalis.Specification.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.eShopWeb.ApplicationCore.Interfaces;
 
 namespace Microsoft.eShopWeb.Infrastructure.Data;
