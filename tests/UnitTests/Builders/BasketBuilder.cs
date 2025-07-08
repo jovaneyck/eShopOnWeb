@@ -1,39 +1,61 @@
 ﻿using Microsoft.eShopWeb.ApplicationCore.Entities.BasketAggregate;
-using NSubstitute;
+using System.Reflection;
 
 namespace Microsoft.eShopWeb.UnitTests.Builders;
 
 public class BasketBuilder
 {
-    private Basket _basket;
-    public string BasketBuyerId => "testbuyerId@test.com";
+    private string _buyerId = "testbuyerId@test.com";
+    private int _basketId = 1;
+    private readonly List<(int catalogItemId, decimal unitPrice, int quantity)> _items = new();
 
-    public int BasketId => 1;
-
-    public BasketBuilder()
+    public BasketBuilder WithBuyerId(string buyerId)
     {
-        _basket = WithNoItems();
+        _buyerId = buyerId;
+        return this;
+    }
+
+    public BasketBuilder WithId(int id)
+    {
+        _basketId = id;
+        return this;
+    }
+
+    public BasketBuilder WithItem(int catalogItemId, decimal unitPrice, int quantity = 1)
+    {
+        return WithItems((catalogItemId, unitPrice, quantity));
+    }
+
+    public BasketBuilder WithItems(params (int catalogItemId, decimal unitPrice, int quantity)[] items)
+    {
+        foreach (var (catalogItemId, unitPrice, quantity) in items)
+        {
+            _items.Add((catalogItemId, unitPrice, quantity));
+        }
+        return this;
+    }
+
+    public BasketBuilder WithOneBasketItem()
+    {
+        return WithItem(2, 3.40m, 4);
     }
 
     public Basket Build()
     {
-        return _basket;
+        var b = new Basket(_buyerId);
+        SetId(b, _basketId);
+
+        foreach (var i in _items)
+        {
+            b.AddItem(i.catalogItemId, i.unitPrice, i.quantity);
+        }
+
+        return b;
     }
 
-    public Basket WithNoItems()
+    private void SetId(Basket b, int id)
     {
-        var basketMock = Substitute.For<Basket>(BasketBuyerId);
-        basketMock.Id.Returns(BasketId);
-
-        _basket = basketMock;
-        return _basket;
-    }
-
-    public Basket WithOneBasketItem()
-    {
-        var basketMock = Substitute.For<Basket>(BasketBuyerId);
-        _basket = basketMock;
-        _basket.AddItem(2, 3.40m, 4);
-        return _basket;
+        var idProperty = typeof(Basket).BaseType?.GetProperty("Id", BindingFlags.Public | BindingFlags.Instance);
+        idProperty?.SetValue(b, id);
     }
 }

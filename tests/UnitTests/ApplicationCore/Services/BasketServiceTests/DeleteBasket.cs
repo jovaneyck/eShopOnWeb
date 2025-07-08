@@ -1,7 +1,6 @@
 ﻿using Microsoft.eShopWeb.ApplicationCore.Entities.BasketAggregate;
 using Microsoft.eShopWeb.ApplicationCore.Interfaces;
 using Microsoft.eShopWeb.ApplicationCore.Services;
-//using Moq;
 using NSubstitute;
 using Xunit;
 
@@ -10,21 +9,34 @@ namespace Microsoft.eShopWeb.UnitTests.ApplicationCore.Services.BasketServiceTes
 public class DeleteBasket
 {
     private readonly string _buyerId = "Test buyerId";
-    private readonly IRepository<Basket> _mockBasketRepo = Substitute.For<IRepository<Basket>>();
+    private readonly IRepository<Basket> _basketRepo = new InMemoryBasketRepository();
     private readonly IAppLogger<BasketService> _mockLogger = Substitute.For<IAppLogger<BasketService>>();
 
     [Fact]
-    public async Task ShouldInvokeBasketRepositoryDeleteAsyncOnce()
+    public async Task DeletesBasketSuccessfully()
     {
+        // Arrange - create and add a basket to the repository
         var basket = new Basket(_buyerId);
         basket.AddItem(1, 1.1m, 1);
         basket.AddItem(2, 1.1m, 1);
-        _mockBasketRepo.GetByIdAsync(Arg.Any<int>(), Arg.Any<CancellationToken>())
-            .Returns(basket);
-        var basketService = new BasketService(_mockBasketRepo, _mockLogger);
+        await _basketRepo.AddAsync(basket, TestContext.Current.CancellationToken);
+        
+        var basketService = new BasketService(_basketRepo, _mockLogger);
 
-        await basketService.DeleteBasketAsync(1);
+        // Act - delete the basket
+        await basketService.DeleteBasketAsync(basket.Id);
 
-        await _mockBasketRepo.Received().DeleteAsync(Arg.Any<Basket>(), Arg.Any<CancellationToken>());
+        // Assert - verify basket is deleted
+        var deletedBasket = await _basketRepo.GetByIdAsync(basket.Id, TestContext.Current.CancellationToken);
+        Assert.Null(deletedBasket);
+    }
+
+    [Fact]
+    public async Task ThrowsWhenDeletingNonExistentBasket()
+    {
+        var basketService = new BasketService(_basketRepo, _mockLogger);
+
+        // Act & Assert - should throw when trying to delete non-existent basket
+        await Assert.ThrowsAsync<ArgumentNullException>(() => basketService.DeleteBasketAsync(999));
     }
 }
