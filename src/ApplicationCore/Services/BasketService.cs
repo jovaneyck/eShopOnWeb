@@ -23,8 +23,6 @@ public class BasketService : IBasketService
 
     public async Task<Basket> AddItemToBasket(string username, int catalogItemId, decimal price, int quantity = 1)
     {
-        var dog = new Dog(DogType.Retriever, 2, 0, false);
-        
         var basketSpec = new BasketWithItemsSpecification(username);
         var basket = await _basketRepository.FirstOrDefaultAsync(basketSpec);
 
@@ -35,8 +33,6 @@ public class BasketService : IBasketService
         }
 
         basket.AddItem(catalogItemId, price, quantity);
-
-        var speed = dog.GetRunningSpeed();
         
         await _basketRepository.UpdateAsync(basket);
         return basket;
@@ -59,7 +55,7 @@ public class BasketService : IBasketService
         {
             if (quantities.TryGetValue(item.Id.ToString(), out var quantity))
             {
-                if (_logger != null) _logger.LogInformation("Updating quantity of item ID:{id} to {quantity}.",item.Id, quantity);
+                _logger.LogInformation("Updating quantity of item ID:{id} to {quantity}.",item.Id, quantity);
                 item.SetQuantity(quantity);
             }
         }
