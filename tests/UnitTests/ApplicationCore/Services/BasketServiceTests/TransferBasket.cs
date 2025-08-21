@@ -2,6 +2,7 @@
 using Microsoft.eShopWeb.ApplicationCore.Interfaces;
 using Microsoft.eShopWeb.ApplicationCore.Services;
 using Microsoft.eShopWeb.ApplicationCore.Specifications;
+using Microsoft.eShopWeb.UnitTests.Builders;
 using NSubstitute;
 using Xunit;
 
@@ -37,15 +38,20 @@ public class TransferBasket
     public async Task TransfersAnonymousBasketItemsToExistingUserBasket()
     {
         // Arrange - create anonymous basket with items
-        var anonymousBasket = new Basket(_anonymousUserId);
-        anonymousBasket.AddItem(1, 10m, 1);
-        anonymousBasket.AddItem(3, 55m, 7);
+        var anonymousBasket = new BasketBuilder()
+            .WithBuyerId(_anonymousUserId)
+            .WithItem(1, 10m, 1)
+            .WithItem(3,55m,7)
+            .Build();
+        
         await _basketRepo.AddAsync(anonymousBasket, TestContext.Current.CancellationToken);
         
         // Arrange - create existing user basket with items  
-        var userBasket = new Basket(_registeredUserId);
-        userBasket.AddItem(1, 10m, 4); // Same item as anonymous basket
-        userBasket.AddItem(2, 99m, 3); // Different item
+        var userBasket = new BasketBuilder()
+            .WithBuyerId(_registeredUserId)
+            .WithItem(1, 10m, 4) // Same item as anonymous basket
+            .WithItem(2, 99m, 3)// Different item
+            .Build(); 
         await _basketRepo.AddAsync(userBasket, TestContext.Current.CancellationToken);
         
         var basketService = new BasketService(_basketRepo, _mockLogger);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.eShopWeb.ApplicationCore.Entities.BasketAggregate;
 using Microsoft.eShopWeb.ApplicationCore.Interfaces;
 using Microsoft.eShopWeb.ApplicationCore.Services;
+using Microsoft.eShopWeb.UnitTests.Builders;
 using NSubstitute;
 using Xunit;
 
@@ -16,9 +17,12 @@ public class DeleteBasket
     public async Task DeletesBasketSuccessfully()
     {
         // Arrange - create and add a basket to the repository
-        var basket = new Basket(_buyerId);
-        basket.AddItem(1, 1.1m, 1);
-        basket.AddItem(2, 1.1m, 1);
+        var basket = new BasketBuilder()
+            .WithBuyerId(_buyerId)
+            .WithItems(
+                (1,1.1m,1),
+                (2,1.1m,1))
+            .Build();
         await _basketRepo.AddAsync(basket, TestContext.Current.CancellationToken);
         
         var basketService = new BasketService(_basketRepo, _mockLogger);
