@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|TodoWrite",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:\\projects\\tdd-guard\\tdd-guard.cmd"
+          }
+        ]
+      }
+    ]
+  }
+}
