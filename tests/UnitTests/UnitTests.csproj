@@ -40,4 +40,10 @@
     <Folder Include="ApplicationCore\Helpers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TddGuard.Dotnet.testlogger.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
