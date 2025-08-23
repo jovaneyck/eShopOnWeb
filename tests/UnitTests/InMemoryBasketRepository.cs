@@ -18,8 +18,9 @@ public class InMemoryBasketRepository : IRepository<Basket>
     {
         if (entity.Id == 0)
         {
+            var nextId = _baskets.Max(b => b.Id) + 1;
             var idProperty = typeof(Basket).BaseType!.GetProperty("Id");
-            idProperty!.SetValue(entity, _nextId++);
+            idProperty!.SetValue(entity, _nextId);
         }
         _baskets.Add(entity);
         return Task.FromResult(entity);
