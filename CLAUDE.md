@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 eShopOnWeb is a Microsoft ASP.NET Core reference application demonstrating Clean Architecture principles in a single-process (monolithic) e-commerce application. It runs on .NET 9.0 and showcases modern web development patterns including ASP.NET Core MVC, Blazor WebAssembly, and API development.
 
+You are running under windows, use windows-style paths.
+
 ## Essential Commands
 
 ### Development Setup
