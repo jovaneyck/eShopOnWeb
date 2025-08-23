@@ -10,6 +10,17 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:\\projects\\tdd-guard\\tdd-guard.cmd"
+          }
+        ]
+      }
     ]
   }
 }
