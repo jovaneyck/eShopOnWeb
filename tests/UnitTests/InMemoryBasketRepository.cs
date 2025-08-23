@@ -12,7 +12,6 @@ namespace Microsoft.eShopWeb.UnitTests;
 public class InMemoryBasketRepository : IRepository<Basket>
 {
     private readonly List<Basket> _baskets = new();
-    private int _nextId = 1;
 
     public Task<Basket> AddAsync(Basket entity, CancellationToken cancellationToken = default)
     {
@@ -20,7 +19,7 @@ public class InMemoryBasketRepository : IRepository<Basket>
         {
             var nextId = _baskets.Max(b => b.Id) + 1;
             var idProperty = typeof(Basket).BaseType!.GetProperty("Id");
-            idProperty!.SetValue(entity, _nextId);
+            idProperty!.SetValue(entity, nextId);
         }
         _baskets.Add(entity);
         return Task.FromResult(entity);
