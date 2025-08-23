@@ -33,9 +33,9 @@ dotnet build ./eShopOnWeb.sln --configuration Debug
 dotnet test ./eShopOnWeb.sln --no-restore --verbosity normal --collect:"XPlat Code Coverage" --logger trx --results-directory coverage
 
 # Run specific test project
-Unit tests: dotnet test tests/UnitTests/UnitTests.csproj --logger:tdd-guard
-Integration tests: dotnet test tests/IntegrationTests/IntegrationTests.csproj --logger:tdd-guard
-Functional tests: dotnet test tests/FunctionalTests/FunctionalTests.csproj --logger:tdd-guard
+Unit tests: tdd-guard-dotnet-test tests/UnitTests/UnitTests.csproj
+Integration tests: tdd-guard-dotnet-test tests/IntegrationTests/IntegrationTests.csproj
+Functional tests: tdd-guard-dotnet-test tests/FunctionalTests/FunctionalTests.csproj
 ```
 
 ### Running Applications
