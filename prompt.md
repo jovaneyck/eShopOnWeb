@@ -1,6 +1,7 @@
 ﻿We'll be implementing a new feature today "split basket". It splits a given basket into two baskets, the original basket that keeps all "cheap" items (basket items with unit price less than 100 dollars), all expensive basket items get transferred to a newly created basket if and when a split needs to happen.
-Use Test-Driven Development (TDD). Write ONLY unit tests in the style of @AddItemToBasket.cs (tests cover both the service and aggregate functionality and use an in memory repository and fluent test data builders).
+Write ONLY unit tests in the style of @AddItemToBasket.cs (tests cover both the service and aggregate functionality and use an in memory repository and fluent test data builders).
 Write production code in the style of the current @BasketService.cs (lookup and orchestration, delegate all functionality to the aggregates).
+
 I expect the Basket aggregate to have a new method that does most of the heavy lifting:
 ```csharp
 public void Basket? Split(decimal threshold) {...}
