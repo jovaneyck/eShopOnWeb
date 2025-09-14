@@ -20,5 +20,5 @@ Acceptance criteria/unit tests:
 
 Do not build the full solution, but ensure all code compiles and unit tests pass by running
 ```shell
-dotnet test .\tests\UnitTests\UnitTests.csproj --no-restore
+dotnet test .\\tests\\UnitTests\\UnitTests.csproj --no-restore
 ```
