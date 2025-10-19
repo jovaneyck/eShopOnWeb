@@ -20,5 +20,5 @@ public void Basket? Split(decimal threshold) {...}
 
 I expect the BasketService to have a new method:
 ```csharp
-public async Task<Result<Basket>> Split(int basketId) {...}
+public async Task<Result<Basket?>> Split(int basketId) {...}
 ```
