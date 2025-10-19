@@ -15,9 +15,9 @@ Implement a new feature. Take care to follow existing coding standards. Always t
 
 # Process
 
-* Write a unit test for every acceptance criteria.
-* Implement the feature, correctly distributing functionality between service, repository and aggregate.
-* The build for this solution is VERY SLOW. Ensure all code compiles and unit tests pass by running the following command:
+* For each acceptance criteria, make sure to include a unit test.
+* Implement the feature taking special care to correctly distribute functionality between service, repository and aggregate.
+* The build command for this solution is VERY SLOW. Ensure all code compiles and unit tests pass by running the following command which runs faster:
 
 ```shell
 dotnet test .\\tests\\UnitTests\\UnitTests.csproj --no-restore
