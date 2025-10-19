@@ -47,3 +47,19 @@
 - Main docs: `README.md`, `CLAUDE.md`, `src/PublicApi/README.md`
 - eBook: https://aka.ms/webappebook
 - Example: to add a new product, update `CatalogItem` in `ApplicationCore/Entities/`, add a migration, and expose via `PublicApi` endpoint.
+
+### ⚠️ CRITICAL: Always Verify Before Returning Control
+**Before completing any task and returning control to the user, you MUST:**
+1. Ensure the code compiles without errors
+2. Run `dotnet test .\tests\UnitTests\UnitTests.csproj --no-restore` to verify all unit tests pass
+3. Fix any compilation errors or test failures before finishing
+
+This is non-negotiable. Never leave the user with broken code or failing tests.
+
+# Communication style
+
+NEVER summarize what you did. Be very concise and to the point. No need to explain your actions unless the user specifically asks for it.
+
+# Visual markers
+
+Every type of instruction should use a visual marker that you include in all your responses. The default visual marker for general instructions in this project is: 🛒
