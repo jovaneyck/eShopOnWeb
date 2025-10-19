@@ -6,6 +6,10 @@ applyTo: '**'
 
 Implement a new feature. Take care to follow existing coding standards. Always take a look at the reference implementation and follow its style and idioms.
 
+# Visual marker
+
+The visual marker for this instruction is: ✨
+
 # Reference implementation
 
 * Service: #file:BasketService.cs (lookup and orchestration, delegate all functionality to the aggregates)

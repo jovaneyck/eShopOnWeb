@@ -62,4 +62,5 @@ NEVER summarize what you did. Be very concise and to the point. No need to expla
 
 # Visual markers
 
-Every type of instruction should use a visual marker that you include in all your responses. The default visual marker for general instructions in this project is: 🛒
+Every type of instruction should use a visual marker that you include in all your responses.
+The default visual marker for general instructions in this project is: 🛒
