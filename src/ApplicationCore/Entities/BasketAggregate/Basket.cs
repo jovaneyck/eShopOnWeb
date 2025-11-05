@@ -38,4 +38,23 @@ public class Basket : BaseEntity, IAggregateRoot
     {
         BuyerId = buyerId;
     }
+
+    public Basket? Split(decimal threshold)
+    {
+        var expensiveItems = _items.Where(i => i.UnitPrice >= threshold).ToList();
+
+        if (expensiveItems.Count == 0 || expensiveItems.Count == _items.Count)
+        {
+            return null;
+        }
+
+        var newBasket = new Basket(BuyerId);
+        foreach (var item in expensiveItems)
+        {
+            newBasket.AddItem(item.CatalogItemId, item.UnitPrice, item.Quantity);
+            _items.Remove(item);
+        }
+
+        return newBasket;
+    }
 }
