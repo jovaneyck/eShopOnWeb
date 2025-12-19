@@ -25,3 +25,4 @@ Read and apply coding guidelines from [code-style.prompt.md](../prompts/code-sty
 ```shell
 dotnet test .\\tests\\UnitTests\\UnitTests.csproj --no-restore
 ```
+* As a final step, verify that every acceptance criterium is covered by a unit test.
