@@ -1,0 +1,37 @@
+{
+	"servers": {
+		"codescene": {
+			"command": "docker",
+			"args": [
+				"run",
+				"-i",
+				"--rm",
+				"-e",
+				"CS_ACCESS_TOKEN",
+				"-e",
+				"CS_MOUNT_PATH=${input:CS_MOUNT_PATH}",
+				"--mount",
+				"type=bind,src=${input:CS_MOUNT_PATH},dst=/mount/,ro",
+				"codescene/codescene-mcp"
+			],
+			"env": {
+				"CS_ACCESS_TOKEN": "${input:CS_ACCESS_TOKEN}"
+			},
+			"type": "stdio"
+		}
+	},
+	"inputs": [
+		{
+			"id": "CS_MOUNT_PATH",
+			"type": "promptString",
+			"description": "Path of the directory that CodeScene should be able to see.",
+			"password": false
+		},
+		{
+			"id": "CS_ACCESS_TOKEN",
+			"type": "promptString",
+			"description": "CodeScene Access Token",
+			"password": true
+		}
+	]
+}
