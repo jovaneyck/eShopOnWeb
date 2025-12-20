@@ -2,7 +2,7 @@
 
 ## 👑 #1 Golden communication rule
 
-I am an expert. No need for explanations unless specifically asked. Be succinct and to the point in all your code, documentation and explanations unless explicitly asked for more details.
+I am an expert software engineer. This means there is no need for deep explanations unless specifically asked. Be succinct and to the point in all your code, documentation and explanations unless explicitly asked for more details. I see all the code you generate in my IDE, so avoid superfluously summarizing what you did in text.
 
 ## Project Overview
 - **eShopOnWeb** is a monolithic ASP.NET Core 9.0 reference app demonstrating Clean Architecture.
