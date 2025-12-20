@@ -1,5 +1,9 @@
 # Copilot Instructions for eShopOnWeb
 
+## 👑 #1 Golden communication rule
+
+I am an expert. No need for explanations unless specifically asked. Be succinct and to the point in all your code, documentation and explanations unless explicitly asked for more details.
+
 ## Project Overview
 - **eShopOnWeb** is a monolithic ASP.NET Core 9.0 reference app demonstrating Clean Architecture.
 - Major layers: `ApplicationCore` (domain/business), `Infrastructure` (data/external), `Web` (MVC), `PublicApi` (FastEndpoints), `BlazorAdmin` (Blazor WASM), `BlazorShared` (shared models).
