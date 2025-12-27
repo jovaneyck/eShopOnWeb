@@ -83,4 +83,20 @@ public class BasketService : IBasketService
         await _basketRepository.UpdateAsync(userBasket);
         await _basketRepository.DeleteAsync(anonymousBasket);
     }
+
+    public async Task<Result<Basket?>> Split(int basketId)
+    {
+        var basketSpec = new BasketWithItemsSpecification(basketId);
+        var basket = await _basketRepository.FirstOrDefaultAsync(basketSpec);
+        if (basket == null) return Result<Basket?>.NotFound();
+
+        var newBasket = basket.Split(100m);
+        if (newBasket != null)
+        {
+            await _basketRepository.AddAsync(newBasket);
+            await _basketRepository.UpdateAsync(basket);
+        }
+
+        return newBasket;
+    }
 }
