@@ -18,6 +18,24 @@
 				"CS_ACCESS_TOKEN": "${input:CS_ACCESS_TOKEN}"
 			},
 			"type": "stdio"
+		},
+		"sonarqube": {
+			"command": "docker",
+			"args": [
+				"run",
+				"-i",
+				"--rm",
+				"-e",
+				"SONARQUBE_TOKEN",
+				"-e",
+				"SONARQUBE_ORG",
+				"mcp/sonarqube"
+			],
+			"env": {
+				"SONARQUBE_TOKEN": "${input:SONARQUBE_TOKEN}",
+				"SONARQUBE_ORG": "${input:SONARQUBE_ORG}"
+			},
+			"type": "stdio"
 		}
 	},
 	"inputs": [
@@ -32,6 +50,18 @@
 			"type": "promptString",
 			"description": "CodeScene Access Token",
 			"password": true
+		},
+		{
+			"id": "SONARQUBE_TOKEN",
+			"type": "promptString",
+			"description": "SONARQUBE_TOKEN",
+			"password": true
+		},
+		{
+			"id": "SONARQUBE_ORG",
+			"type": "promptString",
+			"description": "SONARQUBE_ORG",
+			"password": false
 		}
 	]
 }
