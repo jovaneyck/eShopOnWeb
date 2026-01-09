@@ -263,3 +263,6 @@ pub/
 
 #tdd-guard
 .claude/tdd-guard
+
+#sonarqube analysis files
+.sonarqube/
