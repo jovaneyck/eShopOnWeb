@@ -18,11 +18,11 @@ public class AddItemToBasket
     public async Task AddsNewItemToEmptyBasket()
     {
         var basketService = new BasketService(_basketRepo, _mockLogger);
-        
+
         var result = await basketService.AddItemToBasket(_buyerId, 1, 1.50m);
-        
+
         Assert.NotNull(result);
-        var persistedBasket = await _basketRepo.FirstOrDefaultAsync(new BasketWithItemsSpecification(_buyerId), CancellationToken.None);
+        var persistedBasket = await _basketRepo.FirstOrDefaultAsync(new BasketWithItemsSpecification(_buyerId), TestContext.Current.CancellationToken);
         Assert.NotNull(persistedBasket);
         Assert.Equal(_buyerId, persistedBasket.BuyerId);
         Assert.Equal(_buyerId, persistedBasket.BuyerId);
@@ -37,13 +37,13 @@ public class AddItemToBasket
     {
         var basketService = new BasketService(_basketRepo, _mockLogger);
         var basket = new BasketBuilder().WithBuyerId(_buyerId).Build();
-        await _basketRepo.AddAsync(basket, CancellationToken.None);
-        
+        await _basketRepo.AddAsync(basket, TestContext.Current.CancellationToken);
+
         await basketService.AddItemToBasket(_buyerId, 1, 1.50m);
-        
+
         var result = await basketService.AddItemToBasket(_buyerId, 1, 1.50m);
         Assert.Equal(1, await _basketRepo.CountAsync(TestContext.Current.CancellationToken));
-        Basket persistedBasket = (await _basketRepo.FirstOrDefaultAsync(new BasketWithItemsSpecification(_buyerId), CancellationToken.None))!;
+        Basket persistedBasket = (await _basketRepo.FirstOrDefaultAsync(new BasketWithItemsSpecification(_buyerId), TestContext.Current.CancellationToken))!;
         Assert.NotNull(result);
         Assert.Single(persistedBasket.Items);
         Assert.Equal(2, persistedBasket.Items.First().Quantity);
