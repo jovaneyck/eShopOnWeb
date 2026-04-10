@@ -1,7 +1,7 @@
 ---
-applyTo: '**'
+name: implement-feature
+description: Use whenever the user asks you to implement something. Implementing a new endpoint, a new feature, new usecase.
 ---
-
 # Summary
 
 Implement a new feature. Take care to follow existing coding standards. Always take a look at the reference implementation and follow its style and idioms.
