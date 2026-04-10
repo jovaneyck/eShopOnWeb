@@ -263,3 +263,4 @@ pub/
 
 #tdd-guard
 .claude/tdd-guard
+.sonarqube
